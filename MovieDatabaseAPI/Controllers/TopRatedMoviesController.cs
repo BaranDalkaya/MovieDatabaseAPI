@@ -12,8 +12,7 @@ namespace MovieDatabaseAPI.Controllers
 {
     public class TopRatedMoviesController : Controller
     {
-        public static List<Root> roots = new List<Root>();
-        public static ResponseTopRatedMovies responseObj { get; set; }
+        public  static List<Root> roots = new List<Root>();
 
         public IActionResult Index()
         {
@@ -37,10 +36,10 @@ namespace MovieDatabaseAPI.Controllers
         }
 
 
-        public static async Task<ResponseTopRatedMovies> GetData<T>()
+        public async Task<ResponseTopRatedMovies> GetData<T>()
         {
             
-            responseObj = new ResponseTopRatedMovies();
+            var responseObj = new ResponseTopRatedMovies();
             var apiKey = "6bdd58aefaf7fe620ff0868a44117871";
             var url = $"https://api.themoviedb.org/3/movie/top_rated?api_key={apiKey}&language=en-US&page=1";
 
