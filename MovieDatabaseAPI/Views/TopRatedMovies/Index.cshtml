@@ -1,0 +1,10 @@
+﻿@model MovieDatabaseAPI.Models.Class.ResponseTopRatedMovies
+
+<h1>Top Rated Movies</h1>
+
+<br />
+
+@foreach(var obj in Model.Results)
+            {
+                <a asp-action="Details" asp-route-id="@obj.Id"><p>@obj.Title</p></a>
+            }
