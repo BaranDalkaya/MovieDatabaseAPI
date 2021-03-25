@@ -7,12 +7,20 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using MovieDatabaseAPI.Models.Class;
+using Microsoft.Extensions.Configuration;
+
 
 namespace MovieDatabaseAPI.Controllers
 {
     public class TopRatedMoviesController : Controller
     {
-        public  static List<Root> roots = new List<Root>();
+        public static List<Root> roots = new List<Root>();
+        private readonly IConfiguration _config;
+
+        public TopRatedMoviesController(IConfiguration config)
+        {
+            _config = config;
+        }
 
         public IActionResult Index()
         {
@@ -38,10 +46,12 @@ namespace MovieDatabaseAPI.Controllers
 
         public async Task<ResponseTopRatedMovies> GetData<T>()
         {
-            
-            var responseObj = new ResponseTopRatedMovies();
-            var apiKey = "6bdd58aefaf7fe620ff0868a44117871";
+            // For this to work, you would need to sign up to TMDB and generate an API key.
+            // Once generated, insert this into either appsettings.json or secrets.json for security.
+            // Make sure the key/value is typed exactly like "APIKey" : "your unique apikey" (case sensitive)
+            var apiKey = _config["APIKey"];
             var url = $"https://api.themoviedb.org/3/movie/top_rated?api_key={apiKey}&language=en-US&page=1";
+            var responseObj = new ResponseTopRatedMovies();
 
             try
             {
